@@ -1,0 +1,50 @@
+.hero {
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+    height: 100vh; /* Full viewport height */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    text-align: center; /* Center text alignment */
+  }
+  
+  .hero__content {
+    max-width: 800px; /* Limits the width of the content */
+    color: #333;
+  }
+  
+  .hero__title {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .hero__description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  .hero__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .hero__button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: white;
+  }
+  
+  .hero__button--secondary {
+    background-color: transparent;
+    border: 1px solid black;
+  }
+  
