@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__logo">
-        <h1>TBD</h1>
+        <h1>ReComm</h1>
       </div>
       <nav className="header__nav">
         <ul className="header__menu">

@@ -6,7 +6,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Subscribe from "./components/Subscribe";
 import FullForm from "./utils/FullForm.tsx";
-import Maps from "./utils/Maps.tsx";
+import GoogleMaps from "./components/GoogleMaps"; // Updated import
 import "./styles/App.css";
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
           <FullForm />
         </section>
         <section id="maps">
-          <Maps />
+          <GoogleMaps /> 
         </section>
       </div>
     </LanguageProvider>
