@@ -1,5 +1,5 @@
 import React from 'react';
-import { addDocument } from './firebaseDatabaseHelper';
+import { addDocument } from './firebaseDatabase';
 
 function AddData() {
     const handleAdd = async () => {
