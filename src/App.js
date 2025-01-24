@@ -7,6 +7,7 @@ import Search from "./components/Search";
 import Report from "./components/Report";
 import FullForm from "./utils/FullForm.tsx";
 import Maps from "./utils/Maps.tsx";
+import DisasterList from "./components/DisasterList.tsx";
 import "./styles/App.css";
 
 const App = () => {
@@ -17,6 +18,17 @@ const App = () => {
         <section id="hero">
           <Hero />
         </section>
+        <section id="about">
+          <About />
+        </section>
+        <section id="disasters">
+          <DisasterList />
+        </section>
+        <section id="services">
+          <Services />
+        </section>
+        <section id="subscribe">
+          <Subscribe />
         <section id="search">
           <Search />
         </section>
