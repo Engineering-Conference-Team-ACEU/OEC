@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Services.css'; // Correct relative path to CSS
+import '../styles/Services.css'; 
 
 const Services = () => {
   return (
