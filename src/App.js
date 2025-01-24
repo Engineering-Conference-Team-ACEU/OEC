@@ -7,6 +7,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Subscribe from "./components/Subscribe";
 import ReportForm from "./utils/ReportForm.tsx";
+import Maps from "./utils/Maps.tsx";
 import "./styles/App.css";
 
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/subscribe" element={<Subscribe />} />
           <Route path="/report" element={<ReportForm />} />
+
+          <Route path="/test/maps" element={<Maps />} />
         </Routes>
       </Router>
     </LanguageProvider>
