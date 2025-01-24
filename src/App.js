@@ -3,8 +3,7 @@ import { LanguageProvider } from "./contexts/LanguageContext"; // Wrap with Lang
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Search from "./components/Search";
-//import Services from "./components/Services";
-import Report from "./components/Report";
+import About from "./components/About";
 import FullForm from "./utils/FullForm.tsx";
 import Maps from "./utils/Maps.tsx";
 import DisasterList from "./components/DisasterList.tsx";
@@ -24,11 +23,6 @@ const App = () => {
         <section id="disasters">
           <DisasterList />
         </section>
-        <section id="services">
-          <Services />
-        </section>
-        <section id="subscribe">
-          <Subscribe />
         <section id="search">
           <Search />
         </section>
