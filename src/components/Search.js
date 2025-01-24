@@ -53,27 +53,7 @@ const Search = () => {
     const options = [
         'Type', 
         'Description', 
-        'Detailed Description', 
         'Location', 
-        'Time', 
-        'Full Name', 
-        'Email', 
-        'Phone', 
-        'Date Time', 
-        'Affected Area', 
-        'Specific Location', 
-        'From Date', 
-        'From Time', 
-        'To Date', 
-        'To Time', 
-        'Fatalities Min', 
-        'Fatalities Max', 
-        'Injured Min', 
-        'Injured Max', 
-        'Evacuees Min', 
-        'Evacuees Max', 
-        'Cost Min', 
-        'Cost Max'
     ];
 
     return (
