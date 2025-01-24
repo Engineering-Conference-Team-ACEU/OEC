@@ -1,38 +1,57 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.about {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 4rem 2rem;
+  gap: 2rem; /* Space between the image and content */
+  background-color: #f6ff4d; /* Bright yellow background */
+  border-radius: 15px; /* Rounded corners for the entire section */
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.about__image-container {
+  flex: 1; /* Ensures the image takes up equal space */
+  border-radius: 15px; /* Rounded corners for the image */
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.about__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px; /* Ensures the image respects rounded corners */
+}
+
+.about__content {
+  flex: 1; /* Ensures content takes up equal space */
+  color: #242424; /* Dark text for contrast */
+}
+
+.about__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.about__description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.about__button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #242424; /* Black border */
+  background-color: transparent;
+  color: #242424;
+  border-radius: 30px; /* Fully rounded button */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.about__button:hover {
+  background-color: #242424;
+  color: #fff;
 }

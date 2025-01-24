@@ -1,4 +1,5 @@
 import React from 'react';
+import { LanguageProvider } from './contexts/LanguageContext'; // Wrap with LanguageProvider
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,13 +9,15 @@ import './styles/App.css';
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Hero />
-      <About />
-      <Services />
-      <Subscribe />
-    </div>
+    <LanguageProvider> {/* Wrapping all components */}
+      <div>
+        <Header />
+        <Hero />
+        <About />
+        <Services />
+        <Subscribe />
+      </div>
+    </LanguageProvider>
   );
 };
 
