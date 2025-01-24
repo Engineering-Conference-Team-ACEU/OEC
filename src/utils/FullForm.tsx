@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { addDocument } from './../firebaseDatabase';
 import './FullForm.css';
 
-
 const FullForm: React.FC = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,7 +26,6 @@ const FullForm: React.FC = () => {
     });
 
     const [disasterType, setDisasterType] = useState('');
-    // Removed unused disasterTypes state
     const [specificDisaster, setSpecificDisaster] = useState('');
     const [specificDisasters, setSpecificDisasters] = useState<string[]>([]);
 
@@ -41,8 +39,8 @@ const FullForm: React.FC = () => {
     const handleStatsChange = (field: string, min: number, max: number) => {
         setStats((prevStats) => ({
             ...prevStats,
-            [`${field}Min`]: min,
-            [`${field}Max`]: max,
+            [`${field}Min`]: isNaN(min) ? prevStats[`${field}Min`] : min,
+            [`${field}Max`]: isNaN(max) ? prevStats[`${field}Max`] : max,
         }));
     };
 
@@ -54,15 +52,17 @@ const FullForm: React.FC = () => {
                 email,
                 phone,
                 dateTime,
-                affectedArea,
+                affectedAreas,
                 specificLocation,
                 fromDate,
                 fromTime,
                 toDate,
                 toTime,
-                stats
+                stats,
+                disasterType,
+                specificDisaster
             };
-            const docId = await addDocument('formData', data); // Ensure addDocument is imported or defined
+            const docId = await addDocument('formData', data);
             console.log(`Document written with ID: ${docId}`);
         } catch (error) {
             console.error('Error adding document:', error);
@@ -70,7 +70,7 @@ const FullForm: React.FC = () => {
     };
 
     return (
-        <form className="full-form">
+        <form className="full-form" onSubmit={handleSubmit}>
             <div className="form-section">
                 <label htmlFor="fullName">Full Name:</label>
                 <input
@@ -78,7 +78,6 @@ const FullForm: React.FC = () => {
                     id="fullName"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    
                 />
             </div>
             <div className="form-section">
@@ -88,7 +87,6 @@ const FullForm: React.FC = () => {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    
                 />
             </div>
             <div className="form-section">
@@ -98,7 +96,6 @@ const FullForm: React.FC = () => {
                     id="phone"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    
                 />
             </div>
             <div className="form-section">
@@ -108,7 +105,6 @@ const FullForm: React.FC = () => {
                     id="dateTime"
                     value={dateTime}
                     onChange={(e) => setDateTime(e.target.value)}
-                    
                 />
             </div>
             <div className="form-section">
@@ -134,79 +130,7 @@ const FullForm: React.FC = () => {
                 </div>
             </div>
             <datalist id="affectedAreaOptions">
-                <option value="Toronto" />
-                <option value="Montreal" />
-                <option value="Vancouver" />
-                <option value="Calgary" />
-                <option value="Edmonton" />
-                <option value="Ottawa" />
-                <option value="Winnipeg" />
-                <option value="Quebec City" />
-                <option value="Hamilton" />
-                <option value="Kitchener" />
-                <option value="London" />
-                <option value="Victoria" />
-                <option value="Halifax" />
-                <option value="Oshawa" />
-                <option value="Windsor" />
-                <option value="Saskatoon" />
-                <option value="St. Catharines" />
-                <option value="Regina" />
-                <option value="St. John's" />
-                <option value="Kelowna" />
-                <option value="Barrie" />
-                <option value="Sherbrooke" />
-                <option value="Guelph" />
-                <option value="Abbotsford" />
-                <option value="Kingston" />
-                <option value="Kanata" />
-                <option value="Trois-Rivières" />
-                <option value="Moncton" />
-                <option value="Chicoutimi" />
-                <option value="Milton" />
-                <option value="Red Deer" />
-                <option value="Brantford" />
-                <option value="Thunder Bay" />
-                <option value="White Rock" />
-                <option value="Nanaimo" />
-                <option value="Sudbury" />
-                <option value="Lethbridge" />
-                <option value="Saint John" />
-                <option value="Peterborough" />
-                <option value="Kamloops" />
-                <option value="Sarnia" />
-                <option value="Sault Ste. Marie" />
-                <option value="Chilliwack" />
-                <option value="Prince George" />
-                <option value="Drummondville" />
-                <option value="Belleville" />
-                <option value="Fort McMurray" />
-                <option value="Grande Prairie" />
-                <option value="Fredericton" />
-                <option value="North Bay" />
-                <option value="Cornwall" />
-                <option value="Medicine Hat" />
-                <option value="Airdrie" />
-                <option value="Spruce Grove" />
-                <option value="Lloydminster" />
-                <option value="Orillia" />
-                <option value="Timmins" />
-                <option value="Leamington" />
-                <option value="Stratford" />
-                <option value="Orangeville" />
-                <option value="Bradford" />
-                <option value="Woodstock" />
-                <option value="Innisfil" />
-                <option value="Saint-Hyacinthe" />
-                <option value="Brockville" />
-                <option value="Moose Jaw" />
-                <option value="Midland" />
-                <option value="Parksville" />
-                <option value="Courtenay" />
-                <option value="Penticton" />
-                <option value="Yellowknife" />
-                <option value="Iqaluit" />
-                <option value="Whitehorse" />
+                {/* Add your options here */}
             </datalist>
             <div className="form-section">
                 <label htmlFor="specificLocation">Specific Location:</label>
@@ -290,23 +214,23 @@ const FullForm: React.FC = () => {
                 <div className="stats-header">Statistics</div>
                 <div className="stats-item">
                     <label className="stats-label">Number of Fatalities</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('fatalities', parseFloat(e.target.value), NaN)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('fatalities', NaN, parseFloat(e.target.value))} />
+                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('fatalities', parseFloat(e.target.value), stats.fatalitiesMax)} />
+                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('fatalities', stats.fatalitiesMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
                     <label className="stats-label">Number of Injured / Infected</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('injured', parseFloat(e.target.value), NaN)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('injured', NaN, parseFloat(e.target.value))} />
+                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('injured', parseFloat(e.target.value), stats.injuredMax)} />
+                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('injured', stats.injuredMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
                     <label className="stats-label">Number of Evacuees</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('evacuees', parseFloat(e.target.value), NaN)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('evacuees', NaN, parseFloat(e.target.value))} />
+                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('evacuees', parseFloat(e.target.value), stats.evacueesMax)} />
+                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('evacuees', stats.evacueesMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
                     <label className="stats-label">Estimated Total Cost</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('cost', parseFloat(e.target.value), NaN)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('cost', NaN, parseFloat(e.target.value))} />
+                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('cost', parseFloat(e.target.value), stats.costMax)} />
+                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('cost', stats.costMin, parseFloat(e.target.value))} />
                 </div>
             </div>
             <button type="submit">Submit</button>
