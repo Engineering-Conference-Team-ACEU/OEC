@@ -3,7 +3,6 @@
     justify-content: space-between; /* Space between logo, nav, and actions */
     align-items: center; /* Vertically align items */
     padding: 10px 20px; /* Reduce padding */
-    max-width: 1200px; /* Center-align header with limited width */
     margin: 0 auto; /* Center the header horizontally */
     height: 60px; /* Set a fixed height for the header */
     background-color: #fff; /* Background color */

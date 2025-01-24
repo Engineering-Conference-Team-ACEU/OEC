@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext"; // Wrap with LanguageProvider
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -13,17 +12,27 @@ import "./styles/App.css";
 const App = () => {
   return (
     <LanguageProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<Hero />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/subscribe" element={<Subscribe />} />
-          <Route path="/full-form" element={<FullForm />} />
-          <Route path="/test/maps" element={<Maps />} />
-        </Routes>
-      </Router>
+      <Header />
+      <div className="content">
+        <section id="hero">
+          <Hero />
+        </section>
+        <section id="about">
+          <About />
+        </section>
+        <section id="services">
+          <Services />
+        </section>
+        <section id="subscribe">
+          <Subscribe />
+        </section>
+        <section id="fullForm">
+          <FullForm />
+        </section>
+        <section id="maps">
+          <Maps />
+        </section>
+      </div>
     </LanguageProvider>
   );
 };

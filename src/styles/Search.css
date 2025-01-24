@@ -1,0 +1,55 @@
+.Search {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.Search h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.Search input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.Search select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.Search div {
+    margin-top: 20px;
+}
+
+.Search div > div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.Search h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.Search p {
+    margin: 5px 0;
+    color: #666;
+}

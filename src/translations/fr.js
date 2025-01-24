@@ -17,6 +17,13 @@ const fr = {
       content: 'Notre vision est de révolutionner la manière dont nous alimentons notre monde en exploitant le potentiel illimité des énergies renouvelables...',
       learnMore: 'En savoir plus',
     },
+    report: {   //!!Translate this
+      title: 'Annual Report',
+      download: 'Download Report',
+      summary: 'Summary',
+      details: 'Details',
+      publishedOn: 'Published on',
+    },
     // Add other sections...
   };
   
