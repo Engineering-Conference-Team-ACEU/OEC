@@ -17,6 +17,13 @@ const en = {
       content: 'Our vision is to revolutionize the way we power our world by embracing the limitless potential of renewable energy...',
       learnMore: 'Learn More',
     },
+    report: {
+      title: 'Annual Report',
+      download: 'Download Report',
+      summary: 'Summary',
+      details: 'Details',
+      publishedOn: 'Published on',
+    },
     // Add other sections...
   };
   
