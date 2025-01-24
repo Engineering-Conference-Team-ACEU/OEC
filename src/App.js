@@ -1,22 +1,27 @@
-import React from 'react';
-import { LanguageProvider } from './contexts/LanguageContext'; // Wrap with LanguageProvider
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Subscribe from './components/Subscribe';
-import './styles/App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { LanguageProvider } from "./contexts/LanguageContext"; // Wrap with LanguageProvider
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Services from "./components/Services";
+import Subscribe from "./components/Subscribe";
+import ReportForm from "./utils/ReportForm.tsx";
+import "./styles/App.css";
 
 const App = () => {
   return (
-    <LanguageProvider> {/* Wrapping all components */}
-      <div>
+    <LanguageProvider>
+      <Router>
         <Header />
-        <Hero />
-        <About />
-        <Services />
-        <Subscribe />
-      </div>
+        <Routes>
+          <Route exact path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/subscribe" element={<Subscribe />} />
+          <Route path="/report" element={<ReportForm />} />
+        </Routes>
+      </Router>
     </LanguageProvider>
   );
 };
