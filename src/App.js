@@ -6,7 +6,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
 import Subscribe from "./components/Subscribe";
-import ReportForm from "./utils/ReportForm.tsx";
+import FullForm from "./utils/FullForm.tsx";
 import "./styles/App.css";
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/subscribe" element={<Subscribe />} />
-          <Route path="/report" element={<ReportForm />} />
+          <Route path="/full-form" element={<FullForm />} />
         </Routes>
       </Router>
     </LanguageProvider>
