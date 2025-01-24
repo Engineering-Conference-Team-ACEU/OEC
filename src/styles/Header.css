@@ -1,20 +1,24 @@
 .header {
     display: flex;
-    justify-content: space-between; /* Centers content horizontally */
-    align-items: center; /* Centers items vertically */
-    padding: 5px 5%;
-    background-color: #fff; /* Adjust as needed */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    justify-content: space-between; /* Space between logo, nav, and actions */
+    align-items: center; /* Vertically align items */
+    padding: 10px 20px; /* Reduce padding */
+    max-width: 1200px; /* Center-align header with limited width */
+    margin: 0 auto; /* Center the header horizontally */
+    height: 60px; /* Set a fixed height for the header */
+    background-color: #fff; /* Background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
   }
   
   .header__logo {
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Slightly smaller logo font size */
     font-weight: bold;
+    cursor: pointer;
   }
   
   .header__nav {
-    flex: 1; /* Allow the nav to stretch */
-    text-align: center; /* Center navigation links */
+    flex: 1;
+    text-align: center; /* Center the navigation links */
   }
   
   .header__menu {
@@ -25,7 +29,7 @@
   }
   
   .header__menu li {
-    margin: 0 15px; /* Adjust spacing between links */
+    margin: 0 15px; /* Space between links */
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
@@ -34,7 +38,7 @@
   .header__actions {
     display: flex;
     align-items: center;
-    gap: 15px; /* Spacing between buttons */
+    gap: 10px; /* Reduce space between language toggle and button */
   }
   
   .header__language-toggle {
@@ -45,12 +49,35 @@
   }
   
   .header__contact {
-    padding: 8px 16px;
-    font-size: 0.9rem;
+    padding: 5px 10px; /* Reduce padding for the button */
+    font-size: 0.85rem; /* Slightly smaller font size */
     font-weight: bold;
     border: 1px solid black;
     border-radius: 5px;
     background: white;
     cursor: pointer;
+  }
+
+  .header__menu li {
+    margin: 0 15px; /* Space between links */
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative; /* Necessary for the pseudo-element */
+  }
+  
+  .header__menu li::after {
+    content: ''; /* Empty content for the pseudo-element */
+    position: absolute;
+    left: 0;
+    bottom: -5px; /* Position underline just below the text */
+    width: 0;
+    height: 2px; /* Thickness of the underline */
+    background-color: black; /* Color of the underline */
+    transition: width 0.3s ease; /* Smooth transition for the hover effect */
+  }
+  
+  .header__menu li:hover::after {
+    width: 100%; /* Full width on hover */
   }
   
