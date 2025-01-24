@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../styles/Search.css'; // Correct relative path to CSS
 import { getFirestore, collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
+import { LanguageContext } from '../contexts/LanguageContext';
 
 const searchLimit = 10;
 
@@ -19,6 +20,8 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const Search = () => {
+    const { translations } = useContext(LanguageContext); // Get translations from context
+
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('Type');
     const [results, setResults] = useState([]);
@@ -58,11 +61,11 @@ const Search = () => {
 
     return (
         <section className="Search">
-            <h2>Search Disasters</h2>
+            <h2>{translations.search.title}</h2>
             <div>
                 <input
                     type="text"
-                    placeholder="Search..."
+                    placeholder={translations.search.placeholder}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

@@ -1,7 +1,8 @@
 const en = {
-    header: {
-      services: 'Services',
-      projects: 'Projects',
+    
+  header: {
+      search: 'Search',
+      report: 'Report',
       about: 'About',
       contact: 'Contact Us',
       switchLanguage: 'Switch to French',
@@ -12,10 +13,9 @@ const en = {
       browse: 'Browse (06)',
       projects: 'Projects (30)',
     },
-    about: {
-      title: 'About Us',
-      content: 'Our vision is to revolutionize the way we power our world by embracing the limitless potential of renewable energy...',
-      learnMore: 'Learn More',
+    search: {
+      title: 'Search Disasters',
+      placeholder: 'Search...', 
     },
     report: {
       title: 'Annual Report',

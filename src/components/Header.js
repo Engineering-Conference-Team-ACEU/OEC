@@ -3,7 +3,7 @@ import '../styles/Header.css';
 import { LanguageContext } from '../contexts/LanguageContext'; 
 
 const Header = () => {
-  const { language, toggleLanguage } = useContext(LanguageContext);
+  const { language, toggleLanguage, translations } = useContext(LanguageContext);
 
   const handleScroll = (id) => {
     const element = document.getElementById(id);
@@ -22,8 +22,8 @@ const Header = () => {
       </div>
       <nav className="header__nav">
         <ul className="header__menu">
-          <li onClick={() => handleScroll('about')}>About</li>
-          <li onClick={() => handleScroll('services')}>Service</li>
+          <li onClick={() => handleScroll('search')}>{translations.header.search}</li>
+          <li onClick={() => handleScroll('report')}>{translations.header.report}</li>
           <li onClick={() => handleScroll('fullForm')}>Project</li>
           <li onClick={() => handleScroll('maps')}>Industries</li>
         </ul>
