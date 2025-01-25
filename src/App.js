@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Search from "./components/Search";
+import Maps from "./utils/Maps.tsx";
 import FullForm from "./utils/FullForm.tsx";
 import GoogleMaps from "./components/GoogleMaps";
 import DisasterList from "./components/DisasterList.tsx";
@@ -28,8 +29,8 @@ const App = () => {
         <section id="fullForm">
           <FullForm />
         </section>
-        <section id="maps">
-          <GoogleMaps />
+        <section id="Maps">
+          <Maps/> 
         </section>
       </div>
     </LanguageProvider>
