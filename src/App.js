@@ -18,9 +18,6 @@ const App = () => {
       <Header />
       <DisasterAlert /> {/* Add DisasterAlert component */}
       <div className="content">
-        <section id="hero">
-          <Hero />
-        </section>
         <section id="disasters">
           <DisasterList />
         </section>
