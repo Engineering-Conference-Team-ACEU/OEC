@@ -1,7 +1,7 @@
 const fr = {
     header: {   //!!Translate this
-      search: 'Search',
-      report: 'Report',
+      search: 'Recherche',
+      report: 'Rapport',
       about: 'À propos',
       contact: 'Contactez-nous',
       switchLanguage: 'Passer en anglais',

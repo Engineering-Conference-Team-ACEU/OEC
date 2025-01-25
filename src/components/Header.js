@@ -23,9 +23,7 @@ const Header = () => {
       <nav className="header__nav">
         <ul className="header__menu">
           <li onClick={() => handleScroll('search')}>{translations.header.search}</li>
-          <li onClick={() => handleScroll('report')}>{translations.header.report}</li>
-          <li onClick={() => handleScroll('fullForm')}>Project</li>
-          <li onClick={() => handleScroll('maps')}>Industries</li>
+          <li onClick={() => handleScroll('fullForm')}>{translations.header.report}</li>
         </ul>
       </nav>
       <div className="header__actions">
