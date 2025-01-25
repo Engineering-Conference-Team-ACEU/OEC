@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { addDocument, listenToReports } from './../firebaseDatabase';
 import './FullForm.css';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { useContext } from 'react';
 
 const FullForm: React.FC = () => {
+    const { translations } = useContext(LanguageContext);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
