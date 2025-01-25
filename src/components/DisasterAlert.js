@@ -1,4 +1,3 @@
-// React Component: DisasterAlert.jsx
 import React, { useEffect, useState } from 'react';
 import { onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig'; // Adjust the path as necessary
@@ -22,17 +21,32 @@ const DisasterAlert = () => {
                         setAlert(`New disaster report in Hamilton: ${report.specificDisaster}`);
                         setIsModalOpen(true);
 
-                        // Send email via Node.js Express backend
-                        axios.post('http://localhost:9000/send-email', {
-                            location: report.specificLocation,
-                            disaster: report.specificDisaster
-                        })
-                        .then(response => {
-                            console.log('Email sent successfully:', response.data);
-                        })
-                        .catch(error => {
-                            console.error('Error sending email:', error);
-                        });
+                        // Send email via SendGrid
+                        const sendEmail = async () => {
+                            try {
+                                const response = await axios.post('https://api.sendgrid.com/v3/mail/send', {
+                                    personalizations: [{
+                                        to: [{ email: 'redwhiteredagain@gmail.com' }], // Replace with the recipient's email
+                                        subject: `Disaster Alert: ${report.specificDisaster} in ${report.specificLocation}`
+                                    }],
+                                    from: { email: 'your-email@gmail.com' }, // Replace with your email
+                                    content: [{
+                                        type: 'text/plain',
+                                        value: `A new disaster report has been received for ${report.specificLocation} with the following details:\n\nDisaster Type: ${report.specificDisaster}`
+                                    }]
+                                }, {
+                                    headers: {
+                                        'Authorization': `Bearer YOUR_SENDGRID_API_KEY`, // Replace with your SendGrid API key
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                                console.log('Email sent successfully:', response.data);
+                            } catch (error) {
+                                console.error('Error sending email:', error);
+                            }
+                        };
+
+                        sendEmail();
 
                         // Clear alert after 10 seconds
                         setTimeout(() => {
