@@ -33,8 +33,8 @@ const Maps = () => (
   <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!} onLoad={() => console.log('Maps API has loaded.')}>
     <Map
       style = {{ width: '100%', aspectRatio: 5/2 }}
-      defaultZoom={4}
-      defaultCenter={ { lat: 56.1304, lng: -106.3468 } }
+      defaultZoom={8}
+      defaultCenter={ { lat: 45.67355978561719, lng: -73.82977401495866 } }
       onCameraChanged={ (ev: MapCameraChangedEvent) =>
         console.log(ev.detail.center)
       }>
