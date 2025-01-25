@@ -16,7 +16,7 @@ const fr = {
       title: 'Rechercher des Catastrophes',
       placeholder: 'Search...', 
     },    //!!Translate this
-    report: {
+    fullForm: {
       name: 'Full Name:',
       email: 'Email:',
       phone: 'Phone:',
@@ -31,7 +31,6 @@ const fr = {
       toDate: 'To Date:',
       toTime: 'To Time:',
       dateFormat: 'mm/dd/yyyy',
-      dateTime: '--:-- --',
       statistics: 'Statistics',
       fatalities: 'Number of Fatalities:',
       min: 'Min',

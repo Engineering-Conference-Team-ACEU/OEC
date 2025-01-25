@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { addDocument } from './../firebaseDatabase';
 import './FullForm.css';
 import { LanguageContext } from '../contexts/LanguageContext';
-import { useContext } from 'react';
 
 const FullForm: React.FC = () => {
     const { translations } = useContext(LanguageContext);
@@ -75,7 +74,7 @@ const FullForm: React.FC = () => {
     return (
         <form className="full-form" onSubmit={handleSubmit}>
             <div className="form-section">
-                <label htmlFor="fullName">{translations.report.name}</label>
+                <label htmlFor="fullName">{translations.fullForm.name}</label>
                 <input
                     type="text"
                     id="fullName"
@@ -84,7 +83,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">{translations.fullForm.email}</label>
                 <input
                     type="email"
                     id="email"
@@ -93,7 +92,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="phone">Phone:</label>
+                <label htmlFor="phone">{translations.fullForm.phone}</label>
                 <input
                     type="tel"
                     id="phone"
@@ -102,7 +101,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="dateTime">Date and Time:</label>
+                <label htmlFor="dateTime">{translations.fullForm.dateTime}</label>
                 <input
                     type="datetime-local"
                     id="dateTime"
@@ -111,7 +110,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="affectedArea">Affected Area:</label>
+                <label htmlFor="affectedArea">{translations.fullForm.affectedArea}</label>
                 <input
                     type="text"
                     id="affectedArea"
@@ -136,7 +135,7 @@ const FullForm: React.FC = () => {
                 {/* Add your options here */}
             </datalist>
             <div className="form-section">
-                <label htmlFor="specificLocation">Specific Location:</label>
+                <label htmlFor="specificLocation">{translations.fullForm.specificLocation}</label>
                 <input
                     type="text"
                     id="specificLocation"
@@ -145,7 +144,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="disasterType">Type of Natural Disaster:</label>
+                <label htmlFor="disasterType">{translations.fullForm.typeOfNaturalDisaster}</label>
                 <input
                     type="text"
                     id="disasterType"
@@ -163,7 +162,7 @@ const FullForm: React.FC = () => {
                 </datalist>
             </div>
             <div className="form-section">
-                <label htmlFor="specificDisaster">Specific Disaster:</label>
+                <label htmlFor="specificDisaster">{translations.fullForm.specificDisaster}</label>
                 <input
                     type="text"
                     id="specificDisaster"
@@ -178,7 +177,7 @@ const FullForm: React.FC = () => {
                 </datalist>
             </div>
             <div className="form-section">
-                <label htmlFor="fromDate">From Date:</label>
+                <label htmlFor="fromDate">{translations.fullForm.fromDate}</label>
                 <input
                     type="date"
                     id="fromDate"
@@ -187,7 +186,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="fromTime">From Time:</label>
+                <label htmlFor="fromTime">{translations.fullForm.fromTime}</label>
                 <input
                     type="time"
                     id="fromTime"
@@ -196,7 +195,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="toDate">To Date:</label>
+                <label htmlFor="toDate">{translations.fullForm.toDate}</label>
                 <input
                     type="date"
                     id="toDate"
@@ -205,7 +204,7 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section">
-                <label htmlFor="toTime">To Time:</label>
+                <label htmlFor="toTime">{translations.fullForm.toTime}</label>
                 <input
                     type="time"
                     id="toTime"
@@ -214,29 +213,29 @@ const FullForm: React.FC = () => {
                 />
             </div>
             <div className="form-section stats-container">
-                <div className="stats-header">Statistics</div>
+                <div className="stats-header">{translations.fullForm.statistics}</div>
                 <div className="stats-item">
-                    <label className="stats-label">Number of Fatalities</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('fatalities', parseFloat(e.target.value), stats.fatalitiesMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('fatalities', stats.fatalitiesMin, parseFloat(e.target.value))} />
+                    <label className="stats-label">{translations.fullForm.fatalities}</label>
+                    <input type="number" placeholder={translations.fullForm.min} onChange={(e) => handleStatsChange('fatalities', parseFloat(e.target.value), stats.fatalitiesMax)} />
+                    <input type="number" placeholder={translations.fullForm.max} onChange={(e) => handleStatsChange('fatalities', stats.fatalitiesMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
-                    <label className="stats-label">Number of Injured / Infected</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('injured', parseFloat(e.target.value), stats.injuredMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('injured', stats.injuredMin, parseFloat(e.target.value))} />
+                    <label className="stats-label">{translations.fullForm.injured}</label>
+                    <input type="number" placeholder={translations.fullForm.min} onChange={(e) => handleStatsChange('injured', parseFloat(e.target.value), stats.injuredMax)} />
+                    <input type="number" placeholder={translations.fullForm.max} onChange={(e) => handleStatsChange('injured', stats.injuredMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
-                    <label className="stats-label">Number of Evacuees</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('evacuees', parseFloat(e.target.value), stats.evacueesMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('evacuees', stats.evacueesMin, parseFloat(e.target.value))} />
+                    <label className="stats-label">{translations.fullForm.evacuees}</label>
+                    <input type="number" placeholder={translations.fullForm.min} onChange={(e) => handleStatsChange('evacuees', parseFloat(e.target.value), stats.evacueesMax)} />
+                    <input type="number" placeholder={translations.fullForm.max} onChange={(e) => handleStatsChange('evacuees', stats.evacueesMin, parseFloat(e.target.value))} />
                 </div>
                 <div className="stats-item">
-                    <label className="stats-label">Estimated Total Cost</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('cost', parseFloat(e.target.value), stats.costMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('cost', stats.costMin, parseFloat(e.target.value))} />
+                    <label className="stats-label">{translations.fullForm.cost}</label>
+                    <input type="number" placeholder={translations.fullForm.min} onChange={(e) => handleStatsChange('cost', parseFloat(e.target.value), stats.costMax)} />
+                    <input type="number" placeholder={translations.fullForm.max} onChange={(e) => handleStatsChange('cost', stats.costMin, parseFloat(e.target.value))} />
                 </div>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">{translations.fullForm.submit}</button>
         </form>
     );
 };

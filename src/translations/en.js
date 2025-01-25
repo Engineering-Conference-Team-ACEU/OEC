@@ -17,7 +17,7 @@ const en = {
       title: 'Search Disasters',
       placeholder: 'Search...', 
     },
-    report: {
+    fullForm: {
       name: 'Full Name:',
       email: 'Email:',
       phone: 'Phone:',
