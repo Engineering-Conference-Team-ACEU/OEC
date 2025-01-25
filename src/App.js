@@ -7,6 +7,7 @@ import Maps from "./utils/Maps.tsx";
 import FullForm from "./utils/FullForm.tsx";
 import DisasterList from "./components/DisasterList.tsx";
 import "./styles/App.css";
+import Footer from "./components/Footer.js";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Maps/> 
         </section>
       </div>
+      <Footer />
     </LanguageProvider>
   );
 };

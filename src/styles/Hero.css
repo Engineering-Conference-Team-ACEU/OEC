@@ -3,7 +3,7 @@
     flex-direction: column; /* Stacks content vertically */
     justify-content: center; /* Centers content vertically */
     align-items: center; /* Centers content horizontally */
-    height: 100vh; /* Full viewport height */
+    height: 50vh; /* Full viewport height */
     background-size: cover;
     background-position: center;
     padding: 20px;
@@ -20,12 +20,15 @@
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: 20px;
+    color: white;
+    text-shadow: black 0px 5px 20px;
   }
   
   .hero__description {
     font-size: 1.2rem;
     margin-bottom: 30px;
-    color: #555;
+    color: cornsilk;
+    text-shadow: black 0px 5px 10px;
   }
   
   .hero__buttons {
