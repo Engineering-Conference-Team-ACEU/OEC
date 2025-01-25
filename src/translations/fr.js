@@ -7,8 +7,8 @@ const fr = {
       switchLanguage: 'Passer en anglais',
     },
     hero: {
-      title: 'Favoriser la durabilité grâce aux technologies de pointe.',
-      description: 'Nous favorisons la durabilité en utilisant des technologies innovantes qui réduisent l’impact environnemental et créent un avenir plus vert.',
+      title: 'Signalement de catastrophes par la communauté.',
+      description: 'Informez votre entourage des événements en cours.',
       browse: 'Explorer (06)',
       projects: 'Projets (30)',
     },
