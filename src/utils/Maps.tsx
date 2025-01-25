@@ -12,10 +12,10 @@ const MapHook = () => {
 
     
 
-    var TestMonacoDelimiters = buildCoordinatesArrayFromString(kmlAreaData);
+    var TestDelimiters = buildCoordinatesArrayFromString(kmlAreaData);
 
-    var TestMonacoPolygon = new google.maps.Polygon({
-      paths: TestMonacoDelimiters,
+    var TestPolygon = new google.maps.Polygon({
+      paths: TestDelimiters,
       strokeColor: '#0037FF',
       strokeOpacity: 0.8,
       strokeWeight: 3,
@@ -23,7 +23,7 @@ const MapHook = () => {
       fillOpacity: 0.35
     });
 
-    TestMonacoPolygon.setMap(map);
+    TestPolygon.setMap(map);
   }, [map]);
 
   return <></>;
@@ -36,7 +36,7 @@ const Maps = () => (
       defaultZoom={4}
       defaultCenter={ { lat: 56.1304, lng: -106.3468 } }
       onCameraChanged={ (ev: MapCameraChangedEvent) =>
-        console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
+        console.log(ev.detail.center)
       }>
     </Map>
     <MapHook />
