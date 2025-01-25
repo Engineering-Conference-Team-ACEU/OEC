@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { addDocument } from './../firebaseDatabase';
+import React, { useState, useEffect } from 'react';
+import { addDocument, listenToReports } from './../firebaseDatabase';
 import './FullForm.css';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { useContext } from 'react';
 
 const FullForm: React.FC = () => {
+    const { translations } = useContext(LanguageContext);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [dateTime, setDateTime] = useState('');
     const [affectedArea, setAffectedArea] = useState('');
+    const [affectedAreas, setAffectedAreas] = useState<string[]>([]);
     const [specificLocation, setSpecificLocation] = useState('');
     const [fromDate, setFromDate] = useState('');
-    const [affectedAreas, setAffectedAreas] = useState<string[]>([]);
     const [fromTime, setFromTime] = useState('');
     const [toDate, setToDate] = useState('');
     const [toTime, setToTime] = useState('');
@@ -28,6 +31,7 @@ const FullForm: React.FC = () => {
     const [disasterType, setDisasterType] = useState('');
     const [specificDisaster, setSpecificDisaster] = useState('');
     const [specificDisasters, setSpecificDisasters] = useState<string[]>([]);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const disasterData = {
         Biological: ['Epidemic', 'Infestation', 'Pandemic'],
@@ -62,6 +66,7 @@ const FullForm: React.FC = () => {
                 disasterType,
                 specificDisaster
             };
+            console.log("Submitting data:", data);
             const docId = await addDocument('formData', data);
             console.log(`Document written with ID: ${docId}`);
         } catch (error) {
@@ -69,172 +74,189 @@ const FullForm: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        const unsubscribe = listenToReports((newReport) => {
+            console.log('New report received:', newReport); // Log the new report
+            if (newReport.specificLocation && newReport.specificLocation.includes('Hamilton')) {
+                console.log('Hamilton found in specificLocation'); // Log when Hamilton is found
+                setAlertMessage(`New disaster report in Hamilton: ${newReport.specificDisaster}`);
+                setTimeout(() => setAlertMessage(''), 10000);
+            } else {
+                console.log('Hamilton not found in specificLocation'); // Log when Hamilton is not found
+            }
+        });
+    
+        return () => unsubscribe();
+    }, []);
+
     return (
-        <form className="full-form" onSubmit={handleSubmit}>
-            <div className="form-section">
-                <label htmlFor="fullName">Full Name:</label>
-                <input
-                    type="text"
-                    id="fullName"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="phone">Phone:</label>
-                <input
-                    type="tel"
-                    id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="dateTime">Date and Time:</label>
-                <input
-                    type="datetime-local"
-                    id="dateTime"
-                    value={dateTime}
-                    onChange={(e) => setDateTime(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="affectedArea">Affected Area:</label>
-                <input
-                    type="text"
-                    id="affectedArea"
-                    value={affectedArea}
-                    onChange={(e) => setAffectedArea(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && affectedArea) {
-                            e.preventDefault();
-                            setAffectedAreas((prev) => [...prev, affectedArea]);
-                            setAffectedArea('');
-                        }
-                    }}
-                    list="affectedAreaOptions"
-                />
-                <div id="map">
-                    {affectedAreas.map((area, index) => (
-                        <div key={index}>{area}</div>
-                    ))}
+        <div>
+            {alertMessage && (
+                <div className="alert">
+                    {alertMessage}
                 </div>
-            </div>
-            <datalist id="affectedAreaOptions">
-                {/* Add your options here */}
-            </datalist>
-            <div className="form-section">
-                <label htmlFor="specificLocation">Specific Location:</label>
-                <input
-                    type="text"
-                    id="specificLocation"
-                    value={specificLocation}
-                    onChange={(e) => setSpecificLocation(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="disasterType">Type of Natural Disaster:</label>
-                <input
-                    type="text"
-                    id="disasterType"
-                    value={disasterType}
-                    onChange={(e) => {
-                        setDisasterType(e.target.value);
-                        setSpecificDisasters(disasterData[e.target.value] || []);
-                    }}
-                    list="disasterTypeOptions"
-                />
-                <datalist id="disasterTypeOptions">
-                    {Object.keys(disasterData).map((type) => (
-                        <option key={type} value={type} />
-                    ))}
+            )}
+            <form className="full-form" onSubmit={handleSubmit}>
+                <div className="form-section">
+                    <label htmlFor="fullName">Full Name:</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="phone">Phone:</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="dateTime">Date and Time:</label>
+                    <input
+                        type="datetime-local"
+                        id="dateTime"
+                        value={dateTime}
+                        onChange={(e) => setDateTime(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="affectedArea">Affected Area:</label>
+                    <input
+                        type="text"
+                        id="affectedArea"
+                        value={affectedArea}
+                        onChange={(e) => setAffectedArea(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && affectedArea) {
+                                e.preventDefault();
+                                setAffectedAreas((prev) => [...prev, affectedArea]);
+                                setAffectedArea('');
+                            }
+                        }}
+                        list="affectedAreaOptions"
+                    />
+                    <div id="map">
+                        {affectedAreas.map((area, index) => (
+                            <div key={index}>{area}</div>
+                        ))}
+                    </div>
+                </div>
+                <datalist id="affectedAreaOptions">
+                    {/* Add your options here */}
                 </datalist>
-            </div>
-            <div className="form-section">
-                <label htmlFor="specificDisaster">Specific Disaster:</label>
-                <input
-                    type="text"
-                    id="specificDisaster"
-                    value={specificDisaster}
-                    onChange={(e) => setSpecificDisaster(e.target.value)}
-                    list="specificDisasterOptions"
-                />
-                <datalist id="specificDisasterOptions">
-                    {specificDisasters.map((specific, index) => (
-                        <option key={index} value={specific} />
+                <div className="form-section">
+                    <label htmlFor="specificLocation">Specific Location:</label>
+                    <input
+                        type="text"
+                        id="specificLocation"
+                        value={specificLocation}
+                        onChange={(e) => setSpecificLocation(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="disasterType">Type of Natural Disaster:</label>
+                    <input
+                        type="text"
+                        id="disasterType"
+                        value={disasterType}
+                        onChange={(e) => {
+                            setDisasterType(e.target.value);
+                            setSpecificDisasters(disasterData[e.target.value] || []);
+                        }}
+                        list="disasterTypeOptions"
+                    />
+                    <datalist id="disasterTypeOptions">
+                        {Object.keys(disasterData).map((type) => (
+                            <option key={type} value={type} />
+                        ))}
+                    </datalist>
+                </div>
+                <div className="form-section">
+                    <label htmlFor="specificDisaster">Specific Disaster:</label>
+                    <input
+                        type="text"
+                        id="specificDisaster"
+                        value={specificDisaster}
+                        onChange={(e) => setSpecificDisaster(e.target.value)}
+                        list="specificDisasterOptions"
+                    />
+                    <datalist id="specificDisasterOptions">
+                        {specificDisasters.map((specific, index) => (
+                            <option key={index} value={specific} />
+                        ))}
+                    </datalist>
+                </div>
+                <div className="form-section">
+                    <label htmlFor="fromDate">From Date:</label>
+                    <input
+                        type="date"
+                        id="fromDate"
+                        value={fromDate}
+                        onChange={(e) => setFromDate(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="fromTime">From Time:</label>
+                    <input
+                        type="time"
+                        id="fromTime"
+                        value={fromTime}
+                        onChange={(e) => setFromTime(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="toDate">To Date:</label>
+                    <input
+                        type="date"
+                        id="toDate"
+                        value={toDate}
+                        onChange={(e) => setToDate(e.target.value)}
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="toTime">To Time:</label>
+                    <input
+                        type="time"
+                        id="toTime"
+                        value={toTime}
+                        onChange={(e) => setToTime(e.target.value)}
+                    />
+                </div>
+                <div className="form-section stats-container">
+                    <div className="stats-header">Statistics</div>
+                    {['fatalities', 'injured', 'evacuees', 'cost'].map((field) => (
+                        <div key={field} className="stats-item">
+                            <label className="stats-label">Number of {field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                            <input
+                                type="number"
+                                placeholder="Min"
+                                onChange={(e) => handleStatsChange(field, parseFloat(e.target.value), stats[`${field}Max`])}
+                            />
+                            <input
+                                type="number"
+                                placeholder="Max"
+                                onChange={(e) => handleStatsChange(field, stats[`${field}Min`], parseFloat(e.target.value))}
+                            />
+                        </div>
                     ))}
-                </datalist>
-            </div>
-            <div className="form-section">
-                <label htmlFor="fromDate">From Date:</label>
-                <input
-                    type="date"
-                    id="fromDate"
-                    value={fromDate}
-                    onChange={(e) => setFromDate(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="fromTime">From Time:</label>
-                <input
-                    type="time"
-                    id="fromTime"
-                    value={fromTime}
-                    onChange={(e) => setFromTime(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="toDate">To Date:</label>
-                <input
-                    type="date"
-                    id="toDate"
-                    value={toDate}
-                    onChange={(e) => setToDate(e.target.value)}
-                />
-            </div>
-            <div className="form-section">
-                <label htmlFor="toTime">To Time:</label>
-                <input
-                    type="time"
-                    id="toTime"
-                    value={toTime}
-                    onChange={(e) => setToTime(e.target.value)}
-                />
-            </div>
-            <div className="form-section stats-container">
-                <div className="stats-header">Statistics</div>
-                <div className="stats-item">
-                    <label className="stats-label">Number of Fatalities</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('fatalities', parseFloat(e.target.value), stats.fatalitiesMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('fatalities', stats.fatalitiesMin, parseFloat(e.target.value))} />
                 </div>
-                <div className="stats-item">
-                    <label className="stats-label">Number of Injured / Infected</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('injured', parseFloat(e.target.value), stats.injuredMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('injured', stats.injuredMin, parseFloat(e.target.value))} />
-                </div>
-                <div className="stats-item">
-                    <label className="stats-label">Number of Evacuees</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('evacuees', parseFloat(e.target.value), stats.evacueesMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('evacuees', stats.evacueesMin, parseFloat(e.target.value))} />
-                </div>
-                <div className="stats-item">
-                    <label className="stats-label">Estimated Total Cost</label>
-                    <input type="number" placeholder="Min" onChange={(e) => handleStatsChange('cost', parseFloat(e.target.value), stats.costMax)} />
-                    <input type="number" placeholder="Max" onChange={(e) => handleStatsChange('cost', stats.costMin, parseFloat(e.target.value))} />
-                </div>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     );
 };
 

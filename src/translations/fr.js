@@ -1,7 +1,7 @@
 const fr = {
-    header: {
-      services: 'Services',
-      projects: 'Projets',
+    header: {   //!!Translate this
+      search: 'Search',
+      report: 'Report',
       about: 'À propos',
       contact: 'Contactez-nous',
       switchLanguage: 'Passer en anglais',
@@ -12,17 +12,34 @@ const fr = {
       browse: 'Explorer (06)',
       projects: 'Projets (30)',
     },
-    about: {
-      title: 'À propos de nous',
-      content: 'Notre vision est de révolutionner la manière dont nous alimentons notre monde en exploitant le potentiel illimité des énergies renouvelables...',
-      learnMore: 'En savoir plus',
-    },
-    report: {   //!!Translate this
-      title: 'Annual Report',
-      download: 'Download Report',
-      summary: 'Summary',
-      details: 'Details',
-      publishedOn: 'Published on',
+    search: {
+      title: 'Rechercher des Catastrophes',
+      placeholder: 'Search...', 
+    },    //!!Translate this
+    report: {
+      name: 'Full Name:',
+      email: 'Email:',
+      phone: 'Phone:',
+      dateTime: 'Date and Time:',
+      dateTimeFormat: 'mm/dd/yyyy --:-- --',
+      affectedArea: 'Affected Area:',
+      specificLocation: 'Specific Location:',
+      typeOfNaturalDisaster: 'Type of Natural Disaster:',
+      specificDisaster: 'Specific Disaster:',
+      fromDate: 'From Date:',
+      fromTime: 'From Time:',
+      toDate: 'To Date:',
+      toTime: 'To Time:',
+      dateFormat: 'mm/dd/yyyy',
+      dateTime: '--:-- --',
+      statistics: 'Statistics',
+      fatalities: 'Number of Fatalities:',
+      min: 'Min',
+      max: 'Max',
+      injured: 'Number of Injured / Infected:',
+      evacuees: 'Number of Evacuees:',
+      cost: 'Estimated Total Cost:',
+      submit: 'Submit',
     },
     // Add other sections...
   };
