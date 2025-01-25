@@ -1,7 +1,5 @@
-// src/firebaseDatabase.js
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 import { db } from './firebaseConfig';
-
 
 /**
  * Add a document to a Firestore collection
@@ -27,7 +25,10 @@ export const addDocument = async (collectionName, data) => {
 export const getAllDocuments = async (collectionName) => {
     try {
         const querySnapshot = await getDocs(collection(db, collectionName));
-        return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        return querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+        }));
     } catch (error) {
         console.error('Error getting documents:', error);
         throw error;
@@ -45,14 +46,34 @@ export const getDocumentById = async (collectionName, docId) => {
         const docRef = doc(db, collectionName, docId);
         const docSnapshot = await getDoc(docRef);
         if (docSnapshot.exists()) {
-            return { id: docSnapshot.id, ...docSnapshot.data() };
+            return {
+                id: docSnapshot.id,
+                ...docSnapshot.data()
+            };
         } else {
-            throw new Error('Document not found');
+            throw new Error(`Document with ID ${docId} not found`);
         }
     } catch (error) {
         console.error('Error getting document:', error);
         throw error;
     }
+};
+
+/**
+ * Listen to changes in the 'formData' collection
+ * @param {Function} callback - Function to call with the new report data
+ * @returns {Function} - Unsubscribe function to stop listening to changes
+ */
+export const listenToReports = (callback) => {
+    const unsubscribe = onSnapshot(collection(db, 'formData'), (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+                callback(change.doc.data());
+            }
+        });
+    });
+
+    return unsubscribe;
 };
 
 /**

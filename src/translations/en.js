@@ -8,8 +8,8 @@ const en = {
       switchLanguage: 'Switch to French',
     },
     hero: {
-      title: 'Driving sustainability with cutting-edge technologies.',
-      description: 'We drive sustainability by leveraging innovative technologies that reduce environmental impact and create a cleaner, greener future.',
+      title: 'Community-driven disaster reporting.',
+      description: 'Keep your community aware of unfolding events.',
       browse: 'Browse (06)',
       projects: 'Projects (30)',
     },

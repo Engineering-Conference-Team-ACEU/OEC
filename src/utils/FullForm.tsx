@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { addDocument } from './../firebaseDatabase';
+import React, { useState, useContext, useEffect } from 'react';
+import { addDocument, listenToReports } from './../firebaseDatabase';
 import './FullForm.css';
 import { LanguageContext } from '../contexts/LanguageContext';
 
@@ -10,9 +10,9 @@ const FullForm: React.FC = () => {
     const [phone, setPhone] = useState('');
     const [dateTime, setDateTime] = useState('');
     const [affectedArea, setAffectedArea] = useState('');
+    const [affectedAreas, setAffectedAreas] = useState<string[]>([]);
     const [specificLocation, setSpecificLocation] = useState('');
     const [fromDate, setFromDate] = useState('');
-    const [affectedAreas, setAffectedAreas] = useState<string[]>([]);
     const [fromTime, setFromTime] = useState('');
     const [toDate, setToDate] = useState('');
     const [toTime, setToTime] = useState('');
@@ -30,6 +30,7 @@ const FullForm: React.FC = () => {
     const [disasterType, setDisasterType] = useState('');
     const [specificDisaster, setSpecificDisaster] = useState('');
     const [specificDisasters, setSpecificDisasters] = useState<string[]>([]);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const disasterData = {
         Biological: ['Epidemic', 'Infestation', 'Pandemic'],
@@ -64,12 +65,28 @@ const FullForm: React.FC = () => {
                 disasterType,
                 specificDisaster
             };
+            console.log("Submitting data:", data);
             const docId = await addDocument('formData', data);
             console.log(`Document written with ID: ${docId}`);
         } catch (error) {
             console.error('Error adding document:', error);
         }
     };
+
+    useEffect(() => {
+        const unsubscribe = listenToReports((newReport) => {
+            console.log('New report received:', newReport); // Log the new report
+            if (newReport.specificLocation && newReport.specificLocation.includes('Hamilton')) {
+                console.log('Hamilton found in specificLocation'); // Log when Hamilton is found
+                setAlertMessage(`New disaster report in Hamilton: ${newReport.specificDisaster}`);
+                setTimeout(() => setAlertMessage(''), 10000);
+            } else {
+                console.log('Hamilton not found in specificLocation'); // Log when Hamilton is not found
+            }
+        });
+    
+        return () => unsubscribe();
+    }, []);
 
     return (
         <form className="full-form" onSubmit={handleSubmit}>

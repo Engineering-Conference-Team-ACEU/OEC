@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 // Fetch data from your API
 const fetchData = async () => {
     try {
+        console.log('Fetching data...');
         const response = await fetch('/api/locations'); // Replace with your actual API endpoint
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log('Data fetched successfully:', data);
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -15,12 +17,12 @@ const fetchData = async () => {
     }
 };
 
-
 const GoogleMaps = () => {
     const [locations, setLocations] = useState([]);
 
     useEffect(() => {
         const getLocations = async () => {
+            console.log('Getting locations...');
             const data = await fetchData();
             if (data) {
                 setLocations(data);
@@ -33,6 +35,7 @@ const GoogleMaps = () => {
     useEffect(() => {
         if (locations.length === 0) return;
 
+        console.log('Initializing map with locations:', locations);
         const map = new window.google.maps.Map(document.getElementById('map'), {
             center: { lat: locations[0].latitude, lng: locations[0].longitude },
             zoom: 8,
