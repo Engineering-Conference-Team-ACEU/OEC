@@ -17,9 +17,6 @@ const App = () => {
         <section id="hero">
           <Hero />
         </section>
-        <section id="about">
-          <About />
-        </section>
         <section id="disasters">
           <DisasterList />
         </section>

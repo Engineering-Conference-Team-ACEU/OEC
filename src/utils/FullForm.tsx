@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { addDocument } from './../firebaseDatabase';
 import './FullForm.css';
+import { LanguageContext } from '../contexts/LanguageContext';
+import { useContext } from 'react';
 
 const FullForm: React.FC = () => {
+    const { translations } = useContext(LanguageContext);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -72,7 +75,7 @@ const FullForm: React.FC = () => {
     return (
         <form className="full-form" onSubmit={handleSubmit}>
             <div className="form-section">
-                <label htmlFor="fullName">Full Name:</label>
+                <label htmlFor="fullName">{translations.report.name}</label>
                 <input
                     type="text"
                     id="fullName"

@@ -15,13 +15,31 @@ const fr = {
     search: {
       title: 'Rechercher des Catastrophes',
       placeholder: 'Search...', 
-    },
-    report: {   //!!Translate this
-      title: 'Annual Report',
-      download: 'Download Report',
-      summary: 'Summary',
-      details: 'Details',
-      publishedOn: 'Published on',
+    },    //!!Translate this
+    report: {
+      name: 'Full Name:',
+      email: 'Email:',
+      phone: 'Phone:',
+      dateTime: 'Date and Time:',
+      dateTimeFormat: 'mm/dd/yyyy --:-- --',
+      affectedArea: 'Affected Area:',
+      specificLocation: 'Specific Location:',
+      typeOfNaturalDisaster: 'Type of Natural Disaster:',
+      specificDisaster: 'Specific Disaster:',
+      fromDate: 'From Date:',
+      fromTime: 'From Time:',
+      toDate: 'To Date:',
+      toTime: 'To Time:',
+      dateFormat: 'mm/dd/yyyy',
+      dateTime: '--:-- --',
+      statistics: 'Statistics',
+      fatalities: 'Number of Fatalities:',
+      min: 'Min',
+      max: 'Max',
+      injured: 'Number of Injured / Infected:',
+      evacuees: 'Number of Evacuees:',
+      cost: 'Estimated Total Cost:',
+      submit: 'Submit',
     },
     // Add other sections...
   };
