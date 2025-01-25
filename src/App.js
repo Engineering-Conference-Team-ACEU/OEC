@@ -3,9 +3,8 @@ import { LanguageProvider } from "./contexts/LanguageContext"; // Wrap with Lang
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Search from "./components/Search";
-
+import Maps from "./utils/Maps.tsx";
 import FullForm from "./utils/FullForm.tsx";
-import GoogleMaps from "./components/GoogleMaps"; // Updated import
 import DisasterList from "./components/DisasterList.tsx";
 import "./styles/App.css";
 
@@ -17,9 +16,6 @@ const App = () => {
         <section id="hero">
           <Hero />
         </section>
-        <section id="about">
-          <About />
-        </section>
         <section id="disasters">
           <DisasterList />
         </section>
@@ -29,8 +25,8 @@ const App = () => {
         <section id="fullForm">
           <FullForm />
         </section>
-        <section id="maps">
-          <GoogleMaps /> 
+        <section id="Maps">
+          <Maps/> 
         </section>
       </div>
     </LanguageProvider>
